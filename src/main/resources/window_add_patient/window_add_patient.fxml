@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import tornadofx.control.DateTimePicker?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@window_add_patient.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.AddPatientController">
+  <columnConstraints>
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="SOMETIMES"/>
+    <RowConstraints vgrow="SOMETIMES"/>
+    <RowConstraints vgrow="SOMETIMES"/>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+  </rowConstraints>
+  <padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+  </padding>
+  <children>
+    <DateTimePicker fx:id="dateTime_DTP" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+    <Label text="Дата/Время"/>
+    <Label text="Номер карты" GridPane.rowIndex="1"/>
+    <Label text="ФИО пациента" GridPane.rowIndex="2"/>
+    <TextField fx:id="patientName_TF" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+    <TextField fx:id="number_TF" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+    <Button mnemonicParsing="false" onAction="#add_B_action" text="Добавить" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <graphic>
+        <FontAwesomeIconView fill="#00ff22" glyphName="PLUS" size="15"/>
+      </graphic>
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Button>
+    <Button mnemonicParsing="false" onAction="#cancel_B_action" text="Отмена" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+      <graphic>
+        <FontAwesomeIconView fill="RED" glyphName="BAN" size="15"/>
+      </graphic>
+    </Button>
+  </children>
+</GridPane>

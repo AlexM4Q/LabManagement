@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.futurteam</groupId>
+  <artifactId>labmanagement</artifactId>
+  <version>1.0.0</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <packaging>jar</packaging>
+
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.AlexM4Q</groupId>
+      <artifactId>FuturUtils</artifactId>
+      <version>1e035b95f4becec936f91075a696243aaf63c47f</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.20</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.jensd</groupId>
+      <artifactId>fontawesomefx</artifactId>
+      <version>8.9</version>
+    </dependency>
+    <dependency>
+      <groupId>no.tornado</groupId>
+      <artifactId>tornadofx-controls</artifactId>
+      <version>1.0.4</version>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+</project>
