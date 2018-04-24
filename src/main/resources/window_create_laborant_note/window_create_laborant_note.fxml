@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import tornadofx.control.DateTimePicker?>
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@window_create_laborant_note.css" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.CreateLaborantNoteController">
+  <columnConstraints>
+    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="200.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+  </rowConstraints>
+  <padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+  </padding>
+  <children>
+    <DateTimePicker fx:id="dateTime_DTP" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+    <Label text="Дата/Время" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    <Label text="Номер карты" GridPane.rowIndex="2">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    <Label text="ФИО пациента" GridPane.rowIndex="3">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    <TextField fx:id="patientName_TF" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+    <TextField fx:id="number_TF" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+    <Button mnemonicParsing="false" onAction="#add_B_action" text="Добавить" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <graphic>
+        <FontAwesomeIconView fill="#00ff22" glyphName="PLUS" size="15" />
+      </graphic>
+      <font>
+        <Font name="System Bold" size="14.0" />
+      </font>
+    </Button>
+    <Button mnemonicParsing="false" onAction="#cancel_B_action" text="Отмена" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <font>
+        <Font name="System Bold" size="14.0" />
+      </font>
+      <graphic>
+        <FontAwesomeIconView fill="RED" glyphName="BAN" size="15" />
+      </graphic>
+    </Button>
+      <Label text="Лаборант">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="laborants_CB" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+  </children>
+</GridPane>

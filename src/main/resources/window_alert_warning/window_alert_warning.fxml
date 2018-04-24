@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane prefHeight="300.0" prefWidth="600.0" styleClass="warn-background" stylesheets="@window_alert_warning.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.AlertWarningController">
+  <bottom>
+    <HBox alignment="CENTER_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
+      <BorderPane.margin>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+      </BorderPane.margin>
+      <Button cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#ok_B_action" prefWidth="80.0" styleClass="ok-button" text="ОК">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font></Button>
+         <Button mnemonicParsing="false" onAction="#cancel_B_action" prefWidth="80.0" styleClass="cancel-button" text="Отмена" />
+    </HBox>
+  </bottom>
+  <center>
+    <VBox BorderPane.alignment="CENTER">
+      <BorderPane.margin>
+        <Insets left="20.0" right="20.0" top="20.0" />
+      </BorderPane.margin>
+      <Label fx:id="cause_L" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" minHeight="40.0" styleClass="alert-description" text="null" wrapText="true" VBox.vgrow="ALWAYS">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font></Label>
+      <TextArea fx:id="description_TA" editable="false" wrapText="true">
+        <VBox.margin>
+          <Insets top="10.0" />
+        </VBox.margin>
+      </TextArea>
+    </VBox>
+  </center>
+</BorderPane>

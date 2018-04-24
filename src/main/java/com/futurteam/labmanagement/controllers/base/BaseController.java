@@ -21,4 +21,12 @@ public abstract class BaseController {
     protected final DataBase getDataBase() {
         return getAppContext().getDataBase();
     }
+
+    protected final boolean existsData() {
+        return getAppContext().existsData();
+    }
+
+    protected final void disposeData() {
+        getAppContext().disposeData();
+    }
 }

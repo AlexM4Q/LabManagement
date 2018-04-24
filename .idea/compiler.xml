@@ -17,10 +17,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="labmanagement" />
         <module name="LabManagement" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="labmanagement" target="1.8" />
       <module name="LabManagement" target="1.8" />
     </bytecodeTargetLevel>
   </component>

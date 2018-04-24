@@ -8,12 +8,9 @@ import java.util.List;
 
 public class DataBase implements Serializable {
 
+    private static final long serialVersionUID = -8192938742236107798L;
+
     @Getter
-    private final List<Worker> workers;
-
-    public DataBase() {
-        this.workers = new ArrayList<Worker>();
-    }
-
+    private final List<Laborant> laborants = new ArrayList<>();
 
 }

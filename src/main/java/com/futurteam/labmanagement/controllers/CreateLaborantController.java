@@ -1,18 +1,16 @@
 package com.futurteam.labmanagement.controllers;
 
-import com.futur.ui.FormatterHelper;
 import com.futurteam.labmanagement.controllers.base.BaseController;
-import com.futurteam.labmanagement.entities.models.rows.ManagementRow;
+import com.futurteam.labmanagement.entities.models.Laborant;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.val;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tornadofx.control.DateTimePicker;
 
-public class AddPatientController extends BaseController {
+public final class CreateLaborantController extends BaseController {
 
     @Getter
     @Setter
@@ -20,24 +18,14 @@ public class AddPatientController extends BaseController {
     private Stage stage;
 
     @FXML
-    private DateTimePicker dateTime_DTP;
-    @FXML
-    private TextField number_TF;
-    @FXML
-    private TextField patientName_TF;
+    private TextField workerName_TF;
 
     @Getter
     private boolean isAccepted;
 
-    @FXML
-    public void initialize() {
-        FormatterHelper.applyIntegerFormat(number_TF);
-    }
-
-    public ManagementRow createManagementRow() {
-        val dateTimeValue = dateTime_DTP.getDateTimeValue();
-        // todo set up date/time
-        return new ManagementRow("", "", number_TF.getText(), patientName_TF.getText());
+    @NotNull
+    public Laborant createLaborant() {
+        return new Laborant(workerName_TF.getText());
     }
 
     private void exit(final boolean isAccepted) {
@@ -48,6 +36,8 @@ public class AddPatientController extends BaseController {
 
     @FXML
     private void add_B_action() {
+        // todo Проверять правильность ввода
+
         exit(true);
     }
 
@@ -55,5 +45,4 @@ public class AddPatientController extends BaseController {
     private void cancel_B_action() {
         exit(false);
     }
-
 }

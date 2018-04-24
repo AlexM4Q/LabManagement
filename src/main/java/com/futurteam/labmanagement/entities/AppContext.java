@@ -9,6 +9,9 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.util.Objects;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AppContext {
 
@@ -23,6 +26,11 @@ public final class AppContext {
     @Nullable
     private DataBase dataBase;
 
+    @Getter
+    @Setter
+    @Nullable
+    private File nowInWorkFile;
+
     @NotNull
     public Stage getPrimaryStage() {
         assert primaryStage != null;
@@ -36,5 +44,13 @@ public final class AppContext {
         }
 
         return dataBase;
+    }
+
+    public boolean existsData() {
+        return Objects.nonNull(dataBase);
+    }
+
+    public void disposeData() {
+        dataBase = null;
     }
 }

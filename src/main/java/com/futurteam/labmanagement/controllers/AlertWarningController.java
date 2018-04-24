@@ -2,27 +2,34 @@ package com.futurteam.labmanagement.controllers;
 
 import com.futurteam.labmanagement.controllers.base.BaseController;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class AddWorkerController extends BaseController {
+public final class AlertWarningController extends BaseController {
 
-    @Getter
     @Setter
     @Nullable
     private Stage stage;
 
     @FXML
-    private TextField workerName_TF;
+    private Label cause_L;
+    @FXML
+    private TextArea description_TA;
 
     @Getter
     private boolean isAccepted;
 
-    public String getWorkerName() {
-        return workerName_TF.getText();
+    public void setCause(@NotNull final String cause) {
+        cause_L.setText(cause);
+    }
+
+    public void setDescription(@NotNull final String description) {
+        description_TA.setText(description);
     }
 
     private void exit(final boolean isAccepted) {
@@ -32,7 +39,7 @@ public class AddWorkerController extends BaseController {
     }
 
     @FXML
-    private void add_B_action() {
+    private void ok_B_action() {
         exit(true);
     }
 
