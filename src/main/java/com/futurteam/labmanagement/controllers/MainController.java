@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.Optional;
 
 public final class MainController extends BaseController {
@@ -30,18 +31,17 @@ public final class MainController extends BaseController {
 
     @FXML
     private Label laborantName_L;
-
     @FXML
     private DatePicker periodFrom_DP;
-
     @FXML
     private DatePicker periodTo_DP;
-
     @FXML
     private TreeView<Laborant> workers_TV;
-
     @FXML
     private TableView<LaborantNoteRow> management_TV;
+
+    @Nullable
+    private Laborant currentLaborant;
 
     public MainController() {
         // todo Добавить фильтры
@@ -50,11 +50,7 @@ public final class MainController extends BaseController {
 
     @FXML
     public void initialize() {
-        workers_TV.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            @NotNull val laborant = newValue.getValue();
-            laborantName_L.setText(laborant.getName());
-            setLaborant(laborant);
-        });
+        workers_TV.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setLaborant(newValue.getValue()));
     }
 
     private void clear() {
@@ -83,6 +79,8 @@ public final class MainController extends BaseController {
         @NotNull val rows = management_TV.getItems();
         rows.clear();
         laborant.getNotes().stream().map(LaborantNoteRow::new).forEach(rows::add);
+        laborantName_L.setText(laborant.getName());
+        currentLaborant = laborant;
     }
 
     @FXML
@@ -126,6 +124,11 @@ public final class MainController extends BaseController {
     }
 
     @FXML
+    private void help_B_action() {
+        // todo Выводить окно с хелпом
+    }
+
+    @FXML
     private void addLaborant_B_action() {
         @NotNull val addWorker = FXMLHelper.<CreateLaborantController, Parent>loadFXML(ResourcesUtils.WINDOW_CREATE_LABORANT_FXML);
         @NotNull val node = addWorker.getNode();
@@ -146,6 +149,24 @@ public final class MainController extends BaseController {
 
     @FXML
     private void removeLaborant_B_action() {
+        if (getDataBase().getLaborants().remove(currentLaborant)) {
+            workers_TV.getRoot().getChildren().removeIf(item -> item.getValue() == currentLaborant);
+        }
+    }
+
+    @FXML
+    private void periodSearch_B_action() {
+        if (Objects.isNull(currentLaborant)) {
+            return;
+        }
+
+        @NotNull val pair = FXMLHelper.<LaborantSearchResultController, Parent>loadFXML(ResourcesUtils.WINDOW_LABORANT_NOTES_SEARCH_RESULT);
+        @NotNull val stage = new Stage();
+        pair.getController().setFilter(currentLaborant.getNotes(), periodFrom_DP.getValue(), periodTo_DP.getValue());
+        stage.setTitle("Результаты поиска");
+        stage.setScene(new Scene(pair.getNode()));
+        stage.initOwner(getPrimaryStage());
+        stage.show();
     }
 
     @FXML
@@ -163,16 +184,27 @@ public final class MainController extends BaseController {
 
         if (controller.isAccepted()) {
             @NotNull val laborantNote = controller.createLaborantNote();
-            management_TV.getItems().add(new LaborantNoteRow(laborantNote));
-            controller.getLaborant().getNotes().add(laborantNote);
+            @NotNull val laborant = controller.getLaborant();
+            laborant.getNotes().add(laborantNote);
+            setLaborant(laborant);
         }
     }
 
     @FXML
     private void removePatient_B_action() {
+        @NotNull val row = management_TV.getSelectionModel().getSelectedItem();
+        @NotNull val note = row.getLaborantNote();
+
+        for (@NotNull val laborant : getDataBase().getLaborants()) {
+            if (laborant.getNotes().remove(note)) {
+                management_TV.getItems().remove(row);
+                return;
+            }
+        }
     }
 
     @FXML
     private void chartLaborantNotes_B_action() {
+        // todo Вывод графика
     }
 }

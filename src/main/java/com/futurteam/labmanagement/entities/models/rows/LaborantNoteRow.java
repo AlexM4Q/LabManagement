@@ -2,9 +2,16 @@ package com.futurteam.labmanagement.entities.models.rows;
 
 import com.futurteam.labmanagement.entities.models.LaborantNote;
 import javafx.beans.property.SimpleStringProperty;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Date;
 
 public final class LaborantNoteRow {
+
+    @Getter
+    private final LaborantNote laborantNote;
 
     private final SimpleStringProperty date;
     private final SimpleStringProperty time;
@@ -12,10 +19,16 @@ public final class LaborantNoteRow {
     private final SimpleStringProperty patientName;
 
     public LaborantNoteRow(@NotNull final LaborantNote laborantNote) {
+        this.laborantNote = laborantNote;
         this.date = new SimpleStringProperty(laborantNote.getDate());
         this.time = new SimpleStringProperty(laborantNote.getTime());
         this.number = new SimpleStringProperty(laborantNote.getNumber());
         this.patientName = new SimpleStringProperty(laborantNote.getPatientName());
+    }
+
+    @Nullable
+    public Date getDateTime() {
+        return LaborantNote.getDateTime(getDate(), getTime());
     }
 
     public String getDate() {

@@ -49,7 +49,7 @@ public final class CreateLaborantNoteController extends BaseController {
     public LaborantNote createLaborantNote() {
         @NotNull val dateTimeValue = dateTime_DTP.getDateTimeValue();
         @NotNull val dateTime = Date.from(dateTimeValue.atZone(ZoneId.systemDefault()).toInstant());
-        @NotNull val date = new SimpleDateFormat("yyyy.MM.dd").format(dateTime);
+        @NotNull val date = new SimpleDateFormat("dd.MM.yyyy").format(dateTime);
         @NotNull val time = new SimpleDateFormat("HH:mm:ss").format(dateTime);
         return new LaborantNote(date, time, number_TF.getText(), patientName_TF.getText());
     }

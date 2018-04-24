@@ -4,15 +4,21 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class LaborantNote implements Serializable, Comparable<LaborantNote> {
 
     private static final long serialVersionUID = 7213151863445829452L;
+
+    @NotNull
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
     @Getter
     @NotNull
@@ -27,20 +33,28 @@ public class LaborantNote implements Serializable, Comparable<LaborantNote> {
     @NotNull
     private final String patientName;
 
-    @Override
-    public int compareTo(@NotNull final LaborantNote note) {
-        @NotNull val formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
+    @Nullable
+    public static Date getDateTime(@NotNull final String date, @NotNull final String time) {
         try {
-            @NotNull val thisDate = formatter.parse(date + " " + time);
-            @NotNull val thatDate = formatter.parse(note.date + " " + note.time);
-
-            return thisDate.compareTo(thatDate);
+            return simpleDateFormat.parse(date + " " + time);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return 0;
+        return null;
+    }
+
+    @Nullable
+    public Date getDateTime() {
+        return getDateTime(date, time);
+    }
+
+    @Override
+    public int compareTo(@NotNull final LaborantNote note) {
+        @Nullable val thisDateTime = getDateTime();
+        @Nullable val thatDateTime = note.getDateTime();
+
+        return Objects.isNull(thisDateTime) || Objects.isNull(thatDateTime) ? 0 : thisDateTime.compareTo(thatDateTime);
     }
 
 }
