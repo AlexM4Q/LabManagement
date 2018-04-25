@@ -2,6 +2,7 @@ package com.futurteam.labmanagement.controllers;
 
 import com.futurteam.labmanagement.controllers.base.BaseController;
 import com.futurteam.labmanagement.entities.models.Laborant;
+import com.futurteam.labmanagement.utils.UIUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -36,7 +37,10 @@ public final class CreateLaborantController extends BaseController {
 
     @FXML
     private void add_B_action() {
-        // todo Проверять правильность ввода
+        if (workerName_TF.getText().isEmpty()) {
+            UIUtils.alertWarning("Добавление лаборанта", "Введите Ф.И.О. лаборанта");
+            return;
+        }
 
         exit(true);
     }

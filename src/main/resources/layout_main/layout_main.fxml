@@ -5,44 +5,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@layout_main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+            prefWidth="1200.0" stylesheets="@layout_main.css" xmlns="http://javafx.com/javafx/8.0.111"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.MainController">
   <top>
     <VBox BorderPane.alignment="CENTER">
       <MenuBar>
         <Menu mnemonicParsing="false" text="Файл">
           <MenuItem mnemonicParsing="false" onAction="#new_B_action" text="Новый...">
             <accelerator>
-              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
             </accelerator>
           </MenuItem>
-          <SeparatorMenuItem mnemonicParsing="false" />
+          <SeparatorMenuItem mnemonicParsing="false"/>
           <MenuItem mnemonicParsing="false" onAction="#open_B_action" text="Открыть">
             <accelerator>
-              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
             </accelerator>
           </MenuItem>
           <MenuItem mnemonicParsing="false" onAction="#save_B_action" text="Сохранить">
             <accelerator>
-              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
             </accelerator>
           </MenuItem>
           <MenuItem mnemonicParsing="false" onAction="#saveAs_B_action" text="Сохранить как...">
             <accelerator>
-              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP"/>
             </accelerator>
           </MenuItem>
-          <SeparatorMenuItem mnemonicParsing="false" />
+          <SeparatorMenuItem mnemonicParsing="false"/>
           <MenuItem mnemonicParsing="false" onAction="#exit_B_action" text="Выход">
             <accelerator>
-              <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+              <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP"/>
             </accelerator>
           </MenuItem>
         </Menu>
-        <Menu mnemonicParsing="false" text="Команды">
-          <MenuItem mnemonicParsing="false" text="Delete" />
-        </Menu>
         <Menu mnemonicParsing="false" text="Справка">
-          <MenuItem mnemonicParsing="false" onAction="#help_B_action" text="О Программе" />
+          <MenuItem mnemonicParsing="false" onAction="#dev_B_action" text="О Разработчике"/>
+          <MenuItem mnemonicParsing="false" onAction="#program_B_action" text="О Программе"/>
+          <MenuItem mnemonicParsing="false" onAction="#help_B_action" text="Помощь"/>
         </Menu>
       </MenuBar>
     </VBox>
@@ -51,62 +52,111 @@
     <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
       <VBox spacing="5.0">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <HBox spacing="5.0">
           <Button mnemonicParsing="false" onAction="#addLaborant_B_action" styleClass="toolButton">
             <graphic>
-              <FontAwesomeIconView glyphName="PLUS" />
+              <FontAwesomeIconView glyphName="PLUS"/>
             </graphic>
+            <tooltip>
+              <Tooltip text="Добавить лаборанта"/>
+            </tooltip>
           </Button>
           <Button mnemonicParsing="false" onAction="#removeLaborant_B_action" styleClass="toolButton">
             <graphic>
-              <FontAwesomeIconView glyphName="TRASH" />
+              <FontAwesomeIconView glyphName="TRASH"/>
             </graphic>
+            <tooltip>
+              <Tooltip text="Удалить лаборанта"/>
+            </tooltip>
           </Button>
         </HBox>
         <TreeView fx:id="workers_TV" VBox.vgrow="ALWAYS">
           <TreeItem expanded="true" value="Лаборатория">
             <graphic>
-              <FontAwesomeIconView glyphName="FOLDER" />
+              <FontAwesomeIconView glyphName="FOLDER"/>
             </graphic>
           </TreeItem>
         </TreeView>
       </VBox>
       <VBox alignment="TOP_CENTER" spacing="5.0">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
-        <HBox alignment="CENTER_LEFT" spacing="5.0">
-          <Button mnemonicParsing="false" onAction="#addPatient_B_action" styleClass="toolButton" HBox.hgrow="NEVER">
+        <GridPane hgap="5.0" vgap="5.0">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity"/>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+          </rowConstraints>
+          <Button mnemonicParsing="false" onAction="#addPatient_B_action" styleClass="toolButton">
             <graphic>
-              <FontAwesomeIconView glyphName="PLUS" />
+              <FontAwesomeIconView glyphName="PLUS"/>
             </graphic>
+            <tooltip>
+              <Tooltip text="Добавить запись"/>
+            </tooltip>
           </Button>
-          <Button mnemonicParsing="false" onAction="#removePatient_B_action" styleClass="toolButton" HBox.hgrow="NEVER">
+          <Button mnemonicParsing="false" onAction="#removePatient_B_action" styleClass="toolButton"
+                  GridPane.columnIndex="1">
             <graphic>
-              <FontAwesomeIconView glyphName="TRASH" />
+              <FontAwesomeIconView glyphName="TRASH"/>
             </graphic>
+            <tooltip>
+              <Tooltip text="Удалить запись"/>
+            </tooltip>
           </Button>
-          <Button mnemonicParsing="false" onAction="#chartLaborantNotes_B_action" styleClass="toolButton" HBox.hgrow="NEVER">
+          <Button mnemonicParsing="false" onAction="#chartLaborantNotes_B_action" styleClass="toolButton"
+                  GridPane.columnIndex="2">
             <graphic>
-              <FontAwesomeIconView glyphName="SIGNAL" />
+              <FontAwesomeIconView glyphName="SIGNAL"/>
             </graphic>
+            <tooltip>
+              <Tooltip text="Показать график"/>
+            </tooltip>
           </Button>
-          <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="ALWAYS">
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Период" />
-            <DatePicker fx:id="periodFrom_DP" />
-            <Label ellipsisString="-" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="-" />
-            <DatePicker fx:id="periodTo_DP" />
-            <Button mnemonicParsing="false" onAction="#periodSearch_B_action" styleClass="toolButton">
-              <graphic>
-                <FontAwesomeIconView glyphName="SEARCH" />
-              </graphic>
-            </Button>
-          </HBox>
-        </HBox>
-        <Label fx:id="laborantName_L" text="Имя" />
-        <fx:include fx:id="management_TV" source="../item_laborant_notes_table/item_laborant_notes_table.fxml" VBox.vgrow="ALWAYS" />
+          <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Период"
+                 GridPane.columnIndex="4"/>
+          <DatePicker fx:id="periodFrom_DP" promptText="От..." GridPane.columnIndex="5"/>
+          <Label ellipsisString="-" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                 minWidth="-Infinity" text="-" GridPane.columnIndex="6"/>
+          <DatePicker fx:id="periodTo_DP" promptText="До..." GridPane.columnIndex="7"/>
+          <Button mnemonicParsing="false" onAction="#periodSearch_B_action" styleClass="toolButton"
+                  GridPane.columnIndex="8">
+            <graphic>
+              <FontAwesomeIconView glyphName="SEARCH"/>
+            </graphic>
+            <tooltip>
+              <Tooltip text="Поиск по дате"/>
+            </tooltip>
+          </Button>
+          <Button mnemonicParsing="false" onAction="#patientNameSearch_B_action" styleClass="toolButton"
+                  GridPane.columnIndex="8" GridPane.rowIndex="1">
+            <graphic>
+              <FontAwesomeIconView glyphName="SEARCH"/>
+            </graphic>
+            <tooltip>
+              <Tooltip text="Поиск по Ф.И.О."/>
+            </tooltip>
+          </Button>
+          <TextField fx:id="patientNameSearch_TF" promptText="Ф.И.О. пациента" GridPane.columnIndex="5"
+                     GridPane.columnSpan="3" GridPane.rowIndex="1"/>
+          <Label text="Ф.И.О." GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+        </GridPane>
+        <Label fx:id="laborantName_L" text="Сотрудник"/>
+        <fx:include fx:id="management_TV" source="../item_laborant_notes_table/item_laborant_notes_table.fxml"
+                    VBox.vgrow="ALWAYS"/>
       </VBox>
     </SplitPane>
   </center>

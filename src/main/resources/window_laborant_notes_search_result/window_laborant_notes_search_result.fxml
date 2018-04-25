@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.LaborantSearchResultController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@window_laborant_notes_search_result.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.futurteam.labmanagement.controllers.LaborantSearchResultController">
   <center>
-    <fx:include fx:id="management_TV" source="../item_laborant_notes_table/item_laborant_notes_table.fxml"/>
+    <fx:include fx:id="management_TV" source="../item_laborant_notes_table/item_laborant_notes_table.fxml" />
   </center>
 </BorderPane>

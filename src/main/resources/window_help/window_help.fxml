@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@window_help.css"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+  </padding>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER"
+             text="ПА-МА-ГИ-ТИИИИ, ВИТЕ НАДА ВЫЙТИИИИИИ"
+             textAlignment="JUSTIFY" wrapText="true">
+        <font>
+          <Font size="14.0"/>
+        </font>
+      </Label>
+    </ScrollPane>
+  </center>
+</BorderPane>

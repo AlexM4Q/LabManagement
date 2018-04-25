@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public final class MainController extends BaseController {
 
@@ -35,6 +36,8 @@ public final class MainController extends BaseController {
     private DatePicker periodFrom_DP;
     @FXML
     private DatePicker periodTo_DP;
+    @FXML
+    private TextField patientNameSearch_TF;
     @FXML
     private TreeView<Laborant> workers_TV;
     @FXML
@@ -124,8 +127,36 @@ public final class MainController extends BaseController {
     }
 
     @FXML
+    private void dev_B_action() {
+        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_ABOUT_DEV);
+
+        @NotNull val stage = new Stage();
+        stage.initOwner(getPrimaryStage());
+        stage.setTitle("О Разработчике");
+        stage.setScene(new Scene(node));
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void program_B_action() {
+        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_ABOUT_PROGRAM);
+
+        @NotNull val stage = new Stage();
+        stage.initOwner(getPrimaryStage());
+        stage.setTitle("О Программе");
+        stage.setScene(new Scene(node));
+        stage.showAndWait();
+    }
+
+    @FXML
     private void help_B_action() {
-        // todo Выводить окно с хелпом
+        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_HELP);
+
+        @NotNull val stage = new Stage();
+        stage.initOwner(getPrimaryStage());
+        stage.setTitle("Помощь");
+        stage.setScene(new Scene(node));
+        stage.showAndWait();
     }
 
     @FXML
@@ -156,13 +187,24 @@ public final class MainController extends BaseController {
 
     @FXML
     private void periodSearch_B_action() {
+        showSerch(controller -> controller.setFilter(periodFrom_DP.getValue(), periodTo_DP.getValue()));
+    }
+
+    @FXML
+    private void patientNameSearch_B_action() {
+        showSerch(controller -> controller.setFilter(patientNameSearch_TF.getText()));
+    }
+
+    private void showSerch(@NotNull final Consumer<LaborantSearchResultController> filter) {
         if (Objects.isNull(currentLaborant)) {
             return;
         }
 
         @NotNull val pair = FXMLHelper.<LaborantSearchResultController, Parent>loadFXML(ResourcesUtils.WINDOW_LABORANT_NOTES_SEARCH_RESULT);
         @NotNull val stage = new Stage();
-        pair.getController().setFilter(currentLaborant.getNotes(), periodFrom_DP.getValue(), periodTo_DP.getValue());
+        @NotNull val controller = pair.getController();
+        controller.setNotes(currentLaborant.getNotes());
+        filter.accept(controller);
         stage.setTitle("Результаты поиска");
         stage.setScene(new Scene(pair.getNode()));
         stage.initOwner(getPrimaryStage());
@@ -205,6 +247,19 @@ public final class MainController extends BaseController {
 
     @FXML
     private void chartLaborantNotes_B_action() {
-        // todo Вывод графика
+        if (currentLaborant == null) {
+            return;
+        }
+
+        @NotNull val chart = FXMLHelper.<LaborantNotesChartController, Parent>loadFXML(ResourcesUtils.WINDOW_LABORANT_NOTES_CHART);
+        @NotNull val node = chart.getNode();
+        @NotNull val controller = chart.getController();
+
+        controller.setData(currentLaborant.getNotes());
+
+        @NotNull val stage = new Stage();
+        stage.initOwner(getPrimaryStage());
+        stage.setScene(new Scene(node));
+        stage.show();
     }
 }

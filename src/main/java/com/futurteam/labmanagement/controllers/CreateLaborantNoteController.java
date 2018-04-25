@@ -4,6 +4,7 @@ import com.futur.ui.FormatterHelper;
 import com.futurteam.labmanagement.controllers.base.BaseController;
 import com.futurteam.labmanagement.entities.models.Laborant;
 import com.futurteam.labmanagement.entities.models.LaborantNote;
+import com.futurteam.labmanagement.utils.UIUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -69,7 +70,25 @@ public final class CreateLaborantNoteController extends BaseController {
 
     @FXML
     private void add_B_action() {
-        // todo Проверять правильность ввода
+        if (laborants_CB.getValue() == null) {
+            UIUtils.alertWarning("Создание записи", "Выбирете лаборанта");
+            return;
+        }
+
+        if (dateTime_DTP.getValue() == null) {
+            UIUtils.alertWarning("Создание записи", "Выбирете дату");
+            return;
+        }
+
+        if (number_TF.getText().isEmpty()) {
+            UIUtils.alertWarning("Создание записи", "Введите номер карты");
+            return;
+        }
+
+        if (patientName_TF.getText().isEmpty()) {
+            UIUtils.alertWarning("Создание записи", "Введите Ф.И.О. пациента");
+            return;
+        }
 
         exit(true);
     }

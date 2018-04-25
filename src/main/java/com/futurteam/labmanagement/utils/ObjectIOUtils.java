@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
-public class ObjectIOUtils extends ObjectIOHelper {
+public final class ObjectIOUtils extends ObjectIOHelper {
 
     @Nullable
     public static DataBase readDataBase(@NotNull final File file) {

@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
@@ -51,10 +52,18 @@ public class LaborantNote implements Serializable, Comparable<LaborantNote> {
 
     @Override
     public int compareTo(@NotNull final LaborantNote note) {
-        @Nullable val thisDateTime = getDateTime();
-        @Nullable val thatDateTime = note.getDateTime();
+        return new LaborantNoteComparator().compare(this, note);
+    }
 
-        return Objects.isNull(thisDateTime) || Objects.isNull(thatDateTime) ? 0 : thisDateTime.compareTo(thatDateTime);
+    public static class LaborantNoteComparator implements Comparator<LaborantNote> {
+
+        @Override
+        public int compare(LaborantNote o1, LaborantNote o2) {
+            @Nullable val thisDateTime = o1.getDateTime();
+            @Nullable val thatDateTime = o2.getDateTime();
+
+            return Objects.isNull(thisDateTime) || Objects.isNull(thatDateTime) ? 0 : thisDateTime.compareTo(thatDateTime);
+        }
     }
 
 }
