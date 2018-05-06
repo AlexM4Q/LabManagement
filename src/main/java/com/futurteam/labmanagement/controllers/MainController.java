@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -174,35 +173,17 @@ public final class MainController extends BaseController {
 
     @FXML
     private void dev_B_action() {
-        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_ABOUT_DEV);
-
-        @NotNull val stage = new Stage();
-        stage.initOwner(getPrimaryStage());
-        stage.setTitle("О Разработчике");
-        stage.setScene(new Scene(node));
-        stage.showAndWait();
+        UIUtils.openAboutDev();
     }
 
     @FXML
     private void program_B_action() {
-        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_ABOUT_PROGRAM);
-
-        @NotNull val stage = new Stage();
-        stage.initOwner(getPrimaryStage());
-        stage.setTitle("О Программе");
-        stage.setScene(new Scene(node));
-        stage.showAndWait();
+        UIUtils.openAboutProgram();
     }
 
     @FXML
     private void help_B_action() {
-        @NotNull val node = FXMLHelper.<Parent>loadNode(ResourcesUtils.WINDOW_HELP);
-
-        @NotNull val stage = new Stage();
-        stage.initOwner(getPrimaryStage());
-        stage.setTitle("Помощь");
-        stage.setScene(new Scene(node));
-        stage.showAndWait();
+        UIUtils.openHelp();
     }
 
     @FXML
@@ -211,10 +192,8 @@ public final class MainController extends BaseController {
         @NotNull val node = addWorker.getNode();
         @NotNull val controller = addWorker.getController();
 
-        @NotNull val stage = new Stage();
+        @NotNull val stage = UIUtils.prepareStage("Добавление работника");
         controller.setStage(stage);
-        stage.initOwner(getPrimaryStage());
-        stage.setTitle("Добавление работника");
         stage.setScene(new Scene(node));
         stage.showAndWait();
 
@@ -248,13 +227,11 @@ public final class MainController extends BaseController {
         }
 
         @NotNull val pair = FXMLHelper.<LaborantSearchResultController, Parent>loadFXML(ResourcesUtils.WINDOW_LABORANT_NOTES_SEARCH_RESULT);
-        @NotNull val stage = new Stage();
+        @NotNull val stage = UIUtils.prepareStage("Результаты поиска");
         @NotNull val controller = pair.getController();
         controller.setNotes(currentLaborant.getNotes());
         filter.accept(controller);
-        stage.setTitle("Результаты поиска");
         stage.setScene(new Scene(pair.getNode()));
-        stage.initOwner(getPrimaryStage());
         stage.show();
     }
 
@@ -264,10 +241,8 @@ public final class MainController extends BaseController {
         @NotNull val node = addWorker.getNode();
         @NotNull val controller = addWorker.getController();
 
-        @NotNull val stage = new Stage();
+        @NotNull val stage = UIUtils.prepareStage("Добавление записи");
         controller.setStage(stage);
-        stage.initOwner(getPrimaryStage());
-        stage.setTitle("Добавление записи");
         stage.setScene(new Scene(node));
         stage.showAndWait();
 
@@ -305,8 +280,7 @@ public final class MainController extends BaseController {
 
         controller.setData(currentLaborant.getNotes());
 
-        @NotNull val stage = new Stage();
-        stage.initOwner(getPrimaryStage());
+        @NotNull val stage = UIUtils.prepareStage("График", true);
         stage.setScene(new Scene(node));
         stage.show();
     }

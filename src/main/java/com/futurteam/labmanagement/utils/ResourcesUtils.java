@@ -13,6 +13,8 @@ import static com.futur.common.helpers.resources.ResourcesHelper.getInternalUrl;
 public final class ResourcesUtils {
 
     @PrepareURL
+    public static final URL ICON = getInternalUrl("icon.png");
+    @PrepareURL
     public static final URL LAYOUT_MAIN_FXML = getInternalUrl("layout_main/layout_main.fxml");
     @PrepareURL
     public static final URL WINDOW_CREATE_LABORANT_FXML = getInternalUrl("window_create_laborant/window_create_laborant.fxml");

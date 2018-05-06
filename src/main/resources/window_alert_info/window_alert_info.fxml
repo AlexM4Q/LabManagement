@@ -16,7 +16,6 @@
           <Font name="System Bold" size="12.0"/>
         </font>
       </Button>
-      <Button mnemonicParsing="false" onAction="#cancel_B_action" prefWidth="80.0" styleClass="cancel-button" text="Отмена"/>
     </HBox>
   </bottom>
   <center>

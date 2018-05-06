@@ -12,6 +12,7 @@
 
   <properties>
     <java.version>1.8</java.version>
+    <mainClass>com.futurteam.labmanagement.App</mainClass>
   </properties>
 
   <dependencies>
@@ -74,7 +75,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>libs/</classpathPrefix>
-              <mainClass>com.futurteam.labmanagement.App</mainClass>
+              <mainClass>${mainClass}</mainClass>
             </manifest>
           </archive>
         </configuration>
