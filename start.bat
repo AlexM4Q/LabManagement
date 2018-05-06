@@ -1,3 +1,3 @@
-java -jar target\LabManagement.jar
+java -jar target\LabManagement-jar-with-dependencies.jar
 
 pause
