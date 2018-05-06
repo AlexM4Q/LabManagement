@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="600.0" styleClass="warn-background" stylesheets="@window_alert_warning.css" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.futurteam.labmanagement.controllers.AlertController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="600.0" styleClass="info-background" stylesheets="@window_alert_info.css" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.futurteam.labmanagement.controllers.AlertController">
   <bottom>
     <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
       <BorderPane.margin>

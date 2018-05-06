@@ -42,6 +42,11 @@ public final class CreateLaborantNoteController extends BaseController {
     @FXML
     public void initialize() {
         FormatterHelper.applyIntegerFormat(number_TF);
+        number_TF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 6) {
+                number_TF.setText(oldValue);
+            }
+        });
 
         laborants_CB.getItems().addAll(getDataBase().getLaborants());
     }

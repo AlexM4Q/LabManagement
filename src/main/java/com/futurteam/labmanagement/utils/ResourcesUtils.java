@@ -19,6 +19,8 @@ public final class ResourcesUtils {
     @PrepareURL
     public static final URL WINDOW_CREATE_LABORANT_NOTE_FXML = getInternalUrl("window_create_laborant_note/window_create_laborant_note.fxml");
     @PrepareURL
+    public static final URL WINDOW_ALERT_INFO_FXML = getInternalUrl("window_alert_info/window_alert_info.fxml");
+    @PrepareURL
     public static final URL WINDOW_ALERT_WARNING_FXML = getInternalUrl("window_alert_warning/window_alert_warning.fxml");
     @PrepareURL
     public static final URL WINDOW_LABORANT_NOTES_SEARCH_RESULT = getInternalUrl("window_laborant_notes_search_result/window_laborant_notes_search_result.fxml");

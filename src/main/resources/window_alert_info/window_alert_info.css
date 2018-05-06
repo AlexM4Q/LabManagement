@@ -1,0 +1,38 @@
+.info-background {
+    -fx-background-color: linear-gradient(from 0px 0px to 5px 5px, reflect, #E1E1E1 50%, #87CEEB 50%);
+}
+
+.ok-button {
+    -fx-background-color: #E1E1E1;
+}
+
+.cancel-button {
+    -fx-background-color: #FFFF00;
+}
+
+.alert-description {
+    -fx-label-padding: 5;
+    -fx-border-width: 2;
+    -fx-border-color: #B5B5B5;
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(from 0px 0px to 5px 5px, reflect, #E1E1E1 50%, WHITE 50%)
+}
+
+.button {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: linear-gradient(#191970, #000000);
+    -fx-border-width: 2;
+    -fx-border-color: #B5B5B5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.label,
+.text-input {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: linear-gradient(#8B0000, #000000);
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}

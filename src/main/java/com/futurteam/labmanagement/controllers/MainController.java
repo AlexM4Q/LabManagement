@@ -22,13 +22,33 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 public final class MainController extends BaseController {
 
+    // todo заполнить
+    private static final String[] advices = new String[]{
+            "В жизни надо быть упёртым, но не бараном",
+            "2",
+            "3"
+    };
+
+    private static final String[] nextNames = new String[]{
+            "Ага",
+            "Ок",
+            "Понял",
+            "Хорошо",
+            "Дальше",
+            "Буду знать"
+    };
+
     private final FileChooser dataBaseChooser;
+
+    private final FileChooser exportDataChooser;
 
     @FXML
     private Label laborantName_L;
@@ -42,18 +62,29 @@ public final class MainController extends BaseController {
     private TreeView<Laborant> workers_TV;
     @FXML
     private TableView<LaborantNoteRow> management_TV;
+    @FXML
+    private Label adviceOfDay_L;
+    @FXML
+    private Button nextAdvice_B;
 
     @Nullable
     private Laborant currentLaborant;
 
     public MainController() {
-        // todo Добавить фильтры
         this.dataBaseChooser = new FileChooser();
+        dataBaseChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Бинарные файлы", "*.bin"));
+        dataBaseChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Все файлы", "*.*"));
+
+        this.exportDataChooser = new FileChooser();
+        exportDataChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel(CSV) файлы", "*.csv"));
     }
 
     @FXML
     public void initialize() {
         workers_TV.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setLaborant(newValue.getValue()));
+
+        adviceOfDay_L.setText(advices[0]);
+        nextAdvice_B.setText(nextNames[0]);
     }
 
     private void clear() {
@@ -88,15 +119,26 @@ public final class MainController extends BaseController {
 
     @FXML
     private void new_B_action() {
-        @NotNull val alert = UIUtils.alertWarning("Новый проект", "При создании нового проекта, все не сохраненные данные будут потеряны. Хотите продолжить?");
-        if (alert.getController().isAccepted()) {
-            disposeData();
-            clear();
+        if (existsData()) {
+            @NotNull val alert = UIUtils.alertWarning("Новый проект", "При создании нового проекта, все не сохраненные данные будут потеряны. Хотите продолжить?");
+            if (!alert.getController().isAccepted()) {
+                return;
+            }
         }
+
+        disposeData();
+        clear();
     }
 
     @FXML
     private void open_B_action() {
+        if (existsData()) {
+            @NotNull val alert = UIUtils.alertWarning("Открытие", "При открытии проекта, все не сохраненные данные будут потеряны. Хотите продолжить?");
+            if (!alert.getController().isAccepted()) {
+                return;
+            }
+        }
+
         Optional.ofNullable(dataBaseChooser.showOpenDialog(getPrimaryStage())).ifPresent(this::open);
     }
 
@@ -120,10 +162,14 @@ public final class MainController extends BaseController {
 
     @FXML
     private void exit_B_action() {
-        @NotNull val alert = UIUtils.alertWarning("Выход", "Все не сохраненные данные будут потеряны. Хотите продолжить?");
-        if (alert.getController().isAccepted()) {
-            System.exit(0);
+        if (existsData()) {
+            @NotNull val alert = UIUtils.alertWarning("Выход", "Все не сохраненные данные будут потеряны. Хотите продолжить?");
+            if (!alert.getController().isAccepted()) {
+                return;
+            }
         }
+
+        System.exit(0);
     }
 
     @FXML
@@ -197,6 +243,7 @@ public final class MainController extends BaseController {
 
     private void showSerch(@NotNull final Consumer<LaborantSearchResultController> filter) {
         if (Objects.isNull(currentLaborant)) {
+            UIUtils.alertInfo("Поиск", "Выбирите лаборанта");
             return;
         }
 
@@ -248,6 +295,7 @@ public final class MainController extends BaseController {
     @FXML
     private void chartLaborantNotes_B_action() {
         if (currentLaborant == null) {
+            UIUtils.alertInfo("Построение графика", "Выбирите лаборанта");
             return;
         }
 
@@ -261,5 +309,47 @@ public final class MainController extends BaseController {
         stage.initOwner(getPrimaryStage());
         stage.setScene(new Scene(node));
         stage.show();
+    }
+
+    @FXML
+    private void exportLaborantNotes_B_action() throws FileNotFoundException {
+        if (currentLaborant == null) {
+            UIUtils.alertInfo("Экспорт в CSV", "Выбирите лаборанта");
+            return;
+        }
+
+        @NotNull val notes = currentLaborant.getNotes();
+        if (notes.isEmpty()) {
+            UIUtils.alertInfo("Экспорт в CSV", "В таблице нет данных для экспорта");
+            return;
+        }
+
+        @NotNull val exportFile = exportDataChooser.showSaveDialog(getPrimaryStage());
+        if (exportFile == null) {
+            UIUtils.alertWarning("Экспорт в CSV", "Файл не выбран. Экспорт отменен");
+            return;
+        }
+
+        @NotNull val csv = new StringBuilder();
+        for (@NotNull val note : notes) {
+            csv.append(note.getDate());
+            csv.append(';');
+            csv.append(note.getTime());
+            csv.append(';');
+            csv.append(note.getNumber());
+            csv.append(';');
+            csv.append(note.getPatientName());
+            csv.append('\n');
+        }
+
+        try (@NotNull val out = new PrintWriter(exportFile)) {
+            out.println(csv.toString());
+        }
+    }
+
+    @FXML
+    private void nextAdvice_B_action() {
+        adviceOfDay_L.setText(advices[(int) (advices.length * Math.random())]);
+        nextAdvice_B.setText(nextNames[(int) (nextNames.length * Math.random())]);
     }
 }

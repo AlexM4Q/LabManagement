@@ -21,6 +21,7 @@ public final class App extends Application {
         AppContext.getINSTANCE().setPrimaryStage(primaryStage);
 
         val root = FXMLHelper.<Parent>loadNode(ResourcesUtils.LAYOUT_MAIN_FXML);
+        primaryStage.setTitle("Лаборатория");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
